@@ -1,10 +1,7 @@
 package ru.netology.banklogin.test;
 
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ru.netology.banklogin.data.DataHelper;
 import ru.netology.banklogin.data.SQLHelper;
 import ru.netology.banklogin.page.LoginPage;
@@ -14,6 +11,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.banklogin.data.SQLHelper.cleanDatabase;
 
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class LoginTest {
     LoginPage loginPage;
     SelenideElement header = $("[data-test-id=dashboard]");
@@ -71,8 +69,7 @@ public class LoginTest {
         loginPage.verifyErrorNotificationVisibility();
         authInfo = DataHelper.generateRandomUser();
         loginPage.validLogin(authInfo);
-        loginPage.verifyErrorTextVisible();
-        loginPage.compareErrorTexts();
+        loginPage.compareErrorText();
     }
 
     @Test

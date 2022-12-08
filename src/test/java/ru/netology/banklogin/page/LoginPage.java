@@ -20,20 +20,14 @@ public class LoginPage {
     private SelenideElement errorNotification;
 
     @FindBy(css = "[data-test-id=error-notification] .notification__content")
-    public SelenideElement errorNotificationText;
-
-    @FindBy(css = "[data-test-id=error-notification] .notification__content")
     public SelenideElement thirdErrorNotificationText;
 
     public void verifyErrorNotificationVisibility() {
         errorNotification.shouldBe(visible);
     }
 
-    public void verifyErrorTextVisible() {
-        thirdErrorNotificationText.shouldBe(visible);
-    }
-    public void compareErrorTexts() {
-        errorNotificationText.shouldNotBe((Condition) thirdErrorNotificationText);
+    public void compareErrorText() {
+        thirdErrorNotificationText.shouldHave(Condition.text("попыток")).shouldBe(visible);
     }
 
     public VerificationPage validLogin(DataHelper.AuthInfo info) {
